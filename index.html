@@ -1,354 +1,196 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khu Đô Thị Thành Đông Chí Linh</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
-    }
-    header {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8);
-      color: white;
-      padding: 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .nav {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .menu a {
-      color: white;
-      text-decoration: none;
-      margin-left: 18px;
-      font-size: 15px;
-      font-weight: 600;
-    }
-    .hero {
-      background: linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)),
-      url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1400&q=80') center/cover;
-      color: white;
-      text-align: center;
-      padding: 90px 20px;
-    }
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-    .hero p {
-      font-size: 18px;
-      max-width: 800px;
-      margin: auto;
-      line-height: 1.6;
-    }
-    .hero .btn {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 14px 24px;
-      background: #22c55e;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .section-title h2 {
-      font-size: 34px;
-      margin-bottom: 10px;
-      color: #111827;
-    }
-    .section-title p {
-      color: #6b7280;
-      font-size: 16px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .card {
-      background: white;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-    }
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .card-body {
-      padding: 18px;
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-    }
-    .meta {
-      color: #6b7280;
-      line-height: 1.6;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-    .price {
-      color: #dc2626;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 14px;
-    }
-    .btn-row {
-      display: flex;
-      gap: 10px;
-    }
-    .btn-small {
-      flex: 1;
-      text-align: center;
-      padding: 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-    }
-    .btn-blue {
-      background: #2563eb;
-      color: white;
-    }
-    .btn-light {
-      background: #eff6ff;
-      color: #1d4ed8;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .feature {
-      background: white;
-      padding: 24px;
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    }
-    .feature h4 {
-      margin-top: 0;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    .feature p {
-      margin: 0;
-      color: #6b7280;
-      line-height: 1.6;
-    }
-    .contact-box {
-      background: linear-gradient(135deg, #1d4ed8, #0f172a);
-      color: white;
-      padding: 36px;
-      border-radius: 22px;
-      margin-top: 40px;
-      text-align: center;
-    }
-    .contact-box h3 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    .contact-box p {
-      margin: 8px 0;
-      font-size: 17px;
-    }
-    footer {
-      background: #0f172a;
-      color: #cbd5e1;
-      text-align: center;
-      padding: 24px;
-      margin-top: 40px;
-    }
-    @media (max-width: 900px) {
-      .grid, .features {
-        grid-template-columns: 1fr 1fr;
-      }
-      .hero h1 {
-        font-size: 36px;
-      }
-    }
-    @media (max-width: 600px) {
-      .grid, .features {
-        grid-template-columns: 1fr;
-      }
-      .menu {
-        display: none;
-      }
-      .hero h1 {
-        font-size: 28px;
-      }
-      .hero p {
-        font-size: 16px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khu Đô Thị Thành Đông Chí Linh</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+background:#0a3d91;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.menu{
+background:#222;
+text-align:center;
+padding:10px;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+margin:15px;
+font-size:16px;
+}
+
+.banner{
+background:url("https://images.unsplash.com/photo-1560518883-ce09059eeffa") center/cover;
+height:350px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:40px;
+font-weight:bold;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+overflow:hidden;
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.card-body{
+padding:15px;
+}
+
+.price{
+color:red;
+font-weight:bold;
+font-size:20px;
+}
+
+.btn{
+display:inline-block;
+background:#0a6cff;
+color:white;
+padding:10px 15px;
+text-decoration:none;
+border-radius:5px;
+margin-top:10px;
+}
+
+.map{
+margin-top:40px;
+}
+
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media(max-width:900px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+
 </head>
+
 <body>
 
-  <header>
-    <div class="nav">
-      <div class="logo">Thành Đông Chí Linh</div>
-      <div class="menu">
-        <a href="#gioithieu">Giới thiệu</a>
-        <a href="#sanpham">Sản phẩm</a>
-        <a href="#tienich">Tiện ích</a>
-        <a href="#lienhe">Liên hệ</a>
-      </div>
-    </div>
-  </header>
+<header>
+<h1>KHU ĐÔ THỊ THÀNH ĐÔNG CHÍ LINH</h1>
+<p>Mua bán – ký gửi – bất động sản Chí Linh</p>
+</header>
 
-  <section class="hero">
-    <h1>Khu Đô Thị Thành Đông Chí Linh</h1>
-    <p>
-      Chuyên mua bán - ký gửi - tư vấn bất động sản tại KĐT Thành Đông Chí Linh.
-      Cập nhật quỹ đất đẹp, vị trí tốt, pháp lý rõ ràng, giá hấp dẫn.
-    </p>
-    <a class="btn" href="tel:0922102999">Gọi ngay: 0922 102 999</a>
-  </section>
+<div class="menu">
+<a href="#">Trang chủ</a>
+<a href="#">Sản phẩm</a>
+<a href="#">Bản đồ</a>
+<a href="#">Liên hệ</a>
+</div>
 
-  <section class="container" id="gioithieu">
-    <div class="section-title">
-      <h2>Giới thiệu dự án</h2>
-      <p>Khu đô thị hiện đại, vị trí đẹp, kết nối thuận tiện và tiềm năng tăng giá cao.</p>
-    </div>
-    <div class="features">
-      <div class="feature">
-        <h4>Vị trí trung tâm</h4>
-        <p>Nằm tại Chí Linh, Hải Dương, kết nối thuận tiện đến các trục giao thông chính.</p>
-      </div>
-      <div class="feature">
-        <h4>Hạ tầng đồng bộ</h4>
-        <p>Đường rộng, quy hoạch bài bản, phù hợp để ở, đầu tư và kinh doanh.</p>
-      </div>
-      <div class="feature">
-        <h4>Pháp lý rõ ràng</h4>
-        <p>Sổ đỏ minh bạch, an tâm giao dịch, hỗ trợ khách hàng nhanh chóng.</p>
-      </div>
-      <div class="feature">
-        <h4>Tiềm năng sinh lời</h4>
-        <p>Khu vực phát triển mạnh, giá trị bất động sản còn nhiều dư địa tăng trưởng.</p>
-      </div>
-    </div>
-  </section>
+<div class="banner">
+ĐẤT NỀN GIÁ TỐT
+</div>
 
-  <section class="container" id="sanpham">
-    <div class="section-title">
-      <h2>Sản phẩm nổi bật</h2>
-      <p>Một số lô đất và sản phẩm tiêu biểu đang được quan tâm.</p>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80" alt="Lô đất đẹp">
-        <div class="card-body">
-          <h3>Đất nền vị trí đẹp</h3>
-          <div class="meta">Diện tích: 90m2 • Đường rộng • Gần trục chính • Thuận tiện kinh doanh</div>
-          <div class="price">Giá: 2.x tỷ</div>
-          <div class="btn-row">
-            <a class="btn-small btn-blue" href="tel:0922102999">Gọi ngay</a>
-            <a class="btn-small btn-light" href="#lienhe">Chi tiết</a>
-          </div>
-        </div>
-      </div>
+<div class="container">
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Lô góc đẹp">
-        <div class="card-body">
-          <h3>Lô góc 2 mặt tiền</h3>
-          <div class="meta">Vị trí cực đẹp • Phù hợp mở cửa hàng • Gần chợ và khu đông dân cư</div>
-          <div class="price">Giá: 2.x tỷ</div>
-          <div class="btn-row">
-            <a class="btn-small btn-blue" href="tel:0922102999">Gọi ngay</a>
-            <a class="btn-small btn-light" href="#lienhe">Chi tiết</a>
-          </div>
-        </div>
-      </div>
+<h2>Sản phẩm nổi bật</h2>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80" alt="Đất kinh doanh">
-        <div class="card-body">
-          <h3>Đất kinh doanh tiềm năng</h3>
-          <div class="meta">Gần khu công nghiệp • Mặt tiền rộng • Hạ tầng hoàn thiện • Dễ thanh khoản</div>
-          <div class="price">Giá: 2.x tỷ</div>
-          <div class="btn-row">
-            <a class="btn-small btn-blue" href="tel:0922102999">Gọi ngay</a>
-            <a class="btn-small btn-light" href="#lienhe">Chi tiết</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="grid">
 
-  <section class="container" id="tienich">
-    <div class="section-title">
-      <h2>Tiện ích khu đô thị</h2>
-      <p>Môi trường sống chất lượng, phù hợp an cư và đầu tư lâu dài.</p>
-    </div>
-    <div class="features">
-      <div class="feature">
-        <h4>Đường nội khu rộng</h4>
-        <p>Giao thông nội khu thông thoáng, ô tô di chuyển thuận tiện.</p>
-      </div>
-      <div class="feature">
-        <h4>Gần chợ - trường học</h4>
-        <p>Kết nối nhanh đến các tiện ích thiết yếu hằng ngày.</p>
-      </div>
-      <div class="feature">
-        <h4>Khu dân cư phát triển</h4>
-        <p>Mật độ dân cư tăng nhanh, phù hợp đầu tư đón đầu.</p>
-      </div>
-      <div class="feature">
-        <h4>Không gian hiện đại</h4>
-        <p>Quy hoạch đẹp, phù hợp xây nhà ở, nhà phố, cửa hàng kinh doanh.</p>
-      </div>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<div class="card-body">
+<h3>Lô góc 2 mặt tiền</h3>
+<p>Diện tích: 90m²</p>
+<p class="price">Giá: 2.x tỷ</p>
+<a class="btn" href="tel:0922102999">Gọi ngay</a>
+</div>
+</div>
 
-    <div class="contact-box" id="lienhe">
-      <h3>Liên hệ tư vấn ngay</h3>
-      <p>Hotline: 0922 102 999</p>
-      <p>Email: vudinhthang0490@gmail.com</p>
-      <p>Địa chỉ: Chí Linh, Hải Dương</p>
-      <p>
-        <a href="tel:0922102999" style="color:#fff; font-weight:bold;">Bấm để gọi ngay</a>
-      </p>
-    </div>
-  </section>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1501183638710-841dd1904471">
+<div class="card-body">
+<h3>Đất gần trục chính</h3>
+<p>Diện tích: 80m²</p>
+<p class="price">Giá: 2.x tỷ</p>
+<a class="btn" href="tel:0922102999">Gọi ngay</a>
+</div>
+</div>
 
-  <footer>
-    © 2025 Khu Đô Thị Thành Đông Chí Linh - Website giới thiệu bất động sản
-  </footer>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0">
+<div class="card-body">
+<h3>Đất kinh doanh đẹp</h3>
+<p>Diện tích: 100m²</p>
+<p class="price">Giá: 2.x tỷ</p>
+<a class="btn" href="tel:0922102999">Gọi ngay</a>
+</div>
+</div>
+
+</div>
+
+<div class="map">
+
+<h2>Vị trí dự án</h2>
+
+<iframe
+width="100%"
+height="400"
+style="border:0"
+loading="lazy"
+allowfullscreen
+src="https://maps.google.com/maps?q=Chi%20Linh%20Hai%20Duong&t=&z=13&ie=UTF8&iwloc=&output=embed">
+</iframe>
+
+</div>
+
+</div>
+
+<footer>
+
+<p>Hotline: 0922 102 999</p>
+<p>Email: vudinhthang0490@gmail.com</p>
+<p>Địa chỉ: Chí Linh – Hải Dương</p>
+
+</footer>
 
 </body>
 </html>
