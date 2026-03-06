@@ -1,6 +1,722 @@
-banner.jpg
-duong.jpg
-quyhoach.jpg
-kcn.jpg
-thucte1.jpg
-thucte2.jpg
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khu Đô Thị Thành Đông Chí Linh</title>
+  <meta name="description" content="Website giới thiệu Khu Đô Thị Thành Đông Chí Linh - mua bán, ký gửi, tư vấn bất động sản Chí Linh." />
+  <style>
+    *{
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#f4f7fb;
+      color:#1f2937;
+      line-height:1.6;
+    }
+    a{
+      text-decoration:none;
+    }
+    img{
+      max-width:100%;
+      display:block;
+    }
+    .container{
+      width:min(1200px,92%);
+      margin:0 auto;
+    }
+    .topbar{
+      background:#0b1736;
+      color:#fff;
+      font-size:14px;
+    }
+    .topbar .container{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      padding:10px 0;
+      flex-wrap:wrap;
+    }
+    .navbar{
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    .nav-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:16px 0;
+      flex-wrap:wrap;
+    }
+    .brand{
+      font-size:24px;
+      font-weight:800;
+      color:#0f172a;
+      line-height:1.2;
+    }
+    .brand small{
+      display:block;
+      font-size:12px;
+      color:#64748b;
+      margin-top:4px;
+      font-weight:600;
+    }
+    .menu{
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .menu a{
+      color:#0f172a;
+      font-weight:700;
+      font-size:15px;
+    }
+    .btn-hotline{
+      background:#ef2d2d;
+      color:#fff;
+      padding:12px 20px;
+      border-radius:999px;
+      font-weight:700;
+    }
+
+    .hero{
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      color:#fff;
+      background:
+        linear-gradient(rgba(15,23,42,0.35), rgba(15,23,42,0.25)),
+        url("banner.jpg") center/cover no-repeat;
+      background-color:#cbd5e1;
+    }
+    .hero-content{
+      max-width:760px;
+      padding:90px 0;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:18px;
+    }
+    .hero h1{
+      font-size:56px;
+      line-height:1.12;
+      margin:0 0 18px;
+      font-weight:800;
+      text-shadow:0 3px 10px rgba(0,0,0,0.22);
+    }
+    .hero p{
+      font-size:18px;
+      margin:0 0 28px;
+      color:#f1f5f9;
+      text-shadow:0 2px 8px rgba(0,0,0,0.16);
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:34px;
+    }
+    .btn-main,
+    .btn-sub{
+      padding:14px 22px;
+      border-radius:12px;
+      font-weight:700;
+      display:inline-block;
+    }
+    .btn-main{
+      background:#2563eb;
+      color:#fff;
+    }
+    .btn-sub{
+      background:#fff;
+      color:#0f172a;
+    }
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+    .stat{
+      background:rgba(255,255,255,0.16);
+      border:1px solid rgba(255,255,255,0.18);
+      backdrop-filter:blur(6px);
+      padding:18px;
+      border-radius:18px;
+    }
+    .stat strong{
+      display:block;
+      font-size:24px;
+      margin-bottom:6px;
+    }
+
+    section{
+      padding:72px 0;
+    }
+    .section-head{
+      text-align:center;
+      margin-bottom:34px;
+    }
+    .section-head h2{
+      font-size:38px;
+      margin:0 0 10px;
+      color:#0f172a;
+    }
+    .section-head p{
+      max-width:760px;
+      margin:0 auto;
+      color:#64748b;
+      font-size:17px;
+    }
+
+    .overview{
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:28px;
+      align-items:center;
+    }
+    .overview-card{
+      background:#fff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow:0 12px 32px rgba(15,23,42,0.08);
+    }
+    .overview-card h3{
+      margin-top:0;
+      font-size:28px;
+      color:#0f172a;
+    }
+    .checklist{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px 18px;
+      margin-top:20px;
+    }
+    .check-item{
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      padding:14px 16px;
+      border-radius:14px;
+      font-weight:600;
+      color:#334155;
+    }
+    .overview-image{
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 12px 32px rgba(15,23,42,0.10);
+    }
+    .overview-image img{
+      width:100%;
+      min-height:460px;
+      object-fit:cover;
+    }
+
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+    .feature-box{
+      background:#fff;
+      padding:26px 22px;
+      border-radius:20px;
+      box-shadow:0 10px 26px rgba(15,23,42,0.07);
+      border-top:4px solid #2563eb;
+    }
+    .feature-box h3{
+      margin:0 0 10px;
+      font-size:20px;
+      color:#0f172a;
+    }
+    .feature-box p{
+      margin:0;
+      color:#64748b;
+      font-size:15px;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:1.2fr 1fr 1fr;
+      gap:18px;
+    }
+    .gallery-card{
+      background:#fff;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 10px 28px rgba(15,23,42,0.08);
+    }
+    .gallery-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .gallery-large img{
+      min-height:520px;
+    }
+    .gallery-small img{
+      min-height:250px;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+    .product-card{
+      background:#fff;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 10px 28px rgba(15,23,42,0.08);
+    }
+    .product-card img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+    }
+    .product-body{
+      padding:22px;
+    }
+    .badge{
+      display:inline-block;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-weight:700;
+      font-size:12px;
+      margin-bottom:12px;
+    }
+    .product-body h3{
+      margin:0 0 10px;
+      font-size:23px;
+      color:#0f172a;
+    }
+    .product-body p{
+      color:#64748b;
+      margin:0 0 14px;
+    }
+    .price{
+      color:#dc2626;
+      font-size:28px;
+      font-weight:800;
+      margin-bottom:16px;
+    }
+    .product-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn-card{
+      flex:1;
+      min-width:130px;
+      text-align:center;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:700;
+    }
+    .btn-blue{
+      background:#2563eb;
+      color:#fff;
+    }
+    .btn-light{
+      background:#eff6ff;
+      color:#1d4ed8;
+    }
+
+    .map-wrap{
+      background:#fff;
+      padding:18px;
+      border-radius:24px;
+      box-shadow:0 12px 32px rgba(15,23,42,0.08);
+      overflow:hidden;
+    }
+    iframe{
+      width:100%;
+      height:480px;
+      border:0;
+      border-radius:18px;
+    }
+
+    .contact-cta{
+      background:linear-gradient(135deg,#0f172a,#1d4ed8);
+      color:#fff;
+      border-radius:28px;
+      padding:40px;
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:24px;
+      align-items:center;
+      box-shadow:0 16px 36px rgba(15,23,42,0.18);
+    }
+    .contact-cta h2{
+      margin:0 0 12px;
+      font-size:38px;
+    }
+    .contact-cta p{
+      margin:0 0 10px;
+      color:#dbeafe;
+      font-size:17px;
+    }
+    .contact-box{
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:20px;
+      padding:24px;
+    }
+    .contact-box div{
+      margin-bottom:12px;
+      font-size:16px;
+    }
+
+    footer{
+      background:#0f172a;
+      color:#cbd5e1;
+      padding:26px 0;
+      margin-top:30px;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .floating-call{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      background:#ef2d2d;
+      color:#fff;
+      padding:14px 18px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow:0 12px 24px rgba(220,38,38,0.35);
+      z-index:1200;
+    }
+
+    @media (max-width:1100px){
+      .hero h1{
+        font-size:44px;
+      }
+      .hero-stats,
+      .features-grid,
+      .products{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .gallery-grid,
+      .overview,
+      .contact-cta{
+        grid-template-columns:1fr;
+      }
+    }
+    @media (max-width:720px){
+      .menu{
+        display:none;
+      }
+      .hero{
+        min-height:auto;
+      }
+      .hero-content{
+        padding:72px 0;
+      }
+      .hero h1{
+        font-size:34px;
+      }
+      .hero p{
+        font-size:16px;
+      }
+      .hero-stats,
+      .features-grid,
+      .products,
+      .checklist{
+        grid-template-columns:1fr;
+      }
+      .section-head h2,
+      .contact-cta h2{
+        font-size:28px;
+      }
+      .container{
+        width:94%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <div>Chuyên mua bán - ký gửi - tư vấn bất động sản KĐT Thành Đông Chí Linh</div>
+      <div>Hotline: 0922 102 999</div>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        Thành Đông Chí Linh
+        <small>Website giới thiệu dự án chuẩn công ty BĐS</small>
+      </div>
+      <div class="menu">
+        <a href="#gioithieu">Giới thiệu</a>
+        <a href="#hinhanh">Hình ảnh</a>
+        <a href="#sanpham">Sản phẩm</a>
+        <a href="#vitri">Vị trí</a>
+        <a href="#lienhe">Liên hệ</a>
+      </div>
+      <a class="btn-hotline" href="tel:0922102999">Gọi ngay</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="tag">DỰ ÁN TIỀM NĂNG TẠI CHÍ LINH - HẢI DƯƠNG</div>
+        <h1>Khu Đô Thị Thành Đông Chí Linh</h1>
+        <p>
+          Dự án đất nền nổi bật với vị trí gần khu công nghiệp, hạ tầng phát triển,
+          tiềm năng tăng giá tốt, phù hợp đầu tư - an cư - kinh doanh lâu dài.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-main" href="#sanpham">Xem sản phẩm</a>
+          <a class="btn-sub" href="#vitri">Xem vị trí dự án</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>26.78 ha</strong>
+            <span>Quy mô dự án</span>
+          </div>
+          <div class="stat">
+            <strong>TP Chí Linh</strong>
+            <span>Vị trí phát triển</span>
+          </div>
+          <div class="stat">
+            <strong>Đất nền</strong>
+            <span>Sản phẩm chủ lực</span>
+          </div>
+          <div class="stat">
+            <strong>0922 102 999</strong>
+            <span>Tư vấn nhanh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gioithieu">
+    <div class="container">
+      <div class="section-head">
+        <h2>Tổng quan dự án</h2>
+        <p>
+          Giao diện thiết kế theo phong cách website công ty bất động sản:
+          rõ thông tin, có hình ảnh thực tế, bản đồ vị trí và nút gọi nhanh để khách dễ liên hệ.
+        </p>
+      </div>
+
+      <div class="overview">
+        <div class="overview-card">
+          <h3>KĐT Thành Đông Chí Linh</h3>
+          <p>
+            Dự án nằm tại khu vực có tốc độ phát triển tốt, gần khu công nghiệp và các trục giao thông lớn.
+            Phù hợp cho khách đầu tư, khách ở thực và khách muốn khai thác kinh doanh.
+          </p>
+          <div class="checklist">
+            <div class="check-item">✓ Gần khu công nghiệp</div>
+            <div class="check-item">✓ Hạ tầng đồng bộ</div>
+            <div class="check-item">✓ Tiềm năng tăng giá</div>
+            <div class="check-item">✓ Đường nội khu rộng</div>
+            <div class="check-item">✓ Phù hợp đầu tư</div>
+            <div class="check-item">✓ Kết nối thuận tiện</div>
+          </div>
+        </div>
+        <div class="overview-image">
+          <img src="quyhoach.jpg" alt="Bản đồ quy hoạch dự án Thành Đông Chí Linh">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#eef4ff;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Lợi thế nổi bật</h2>
+        <p>Những điểm mạnh giúp dự án thu hút khách hàng và nhà đầu tư.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <h3>Vị trí chiến lược</h3>
+          <p>Tiếp cận nhanh đến khu công nghiệp, tuyến đường lớn và khu dân cư hiện hữu.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Tiềm năng khai thác</h3>
+          <p>Phù hợp mua đầu tư, xây ở, cho thuê hoặc kinh doanh nhờ mật độ dân cư tăng dần.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Quy hoạch bài bản</h3>
+          <p>Bố cục dự án rõ ràng, tiện ích nội khu và hạ tầng giao thông được đầu tư đồng bộ.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Dễ tiếp cận khách</h3>
+          <p>Website rõ thông tin, có hình ảnh, bản đồ và nút gọi nhanh để khách liên hệ ngay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hinhanh">
+    <div class="container">
+      <div class="section-head">
+        <h2>Hình ảnh thực tế & quy hoạch</h2>
+        <p>Hình ảnh trực quan giúp khách hàng dễ hình dung giá trị và vị trí của dự án.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card gallery-large">
+          <img src="quyhoach.jpg" alt="Quy hoạch dự án Thành Đông Chí Linh">
+        </div>
+        <div class="gallery-card gallery-small">
+          <img src="kcn.jpg" alt="Khu công nghiệp gần dự án">
+        </div>
+        <div class="gallery-card gallery-small">
+          <img src="duong.jpg" alt="Hạ tầng giao thông thực tế gần dự án">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sanpham" style="background:#f8fbff;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Sản phẩm nổi bật</h2>
+        <p>Bạn có thể dùng web này để gửi khách, chạy quảng cáo hoặc gắn link Facebook, Zalo.</p>
+      </div>
+
+      <div class="products">
+        <div class="product-card">
+          <img src="duong.jpg" alt="Lô góc 2 mặt tiền">
+          <div class="product-body">
+            <div class="badge">Lô đẹp nổi bật</div>
+            <h3>Lô góc 2 mặt tiền</h3>
+            <p>Vị trí đẹp, đường rộng, phù hợp mở cửa hàng, kinh doanh hoặc đầu tư giữ tiền.</p>
+            <div class="price">Giá: 2.x tỷ</div>
+            <div class="product-actions">
+              <a class="btn-card btn-blue" href="tel:0922102999">Gọi ngay</a>
+              <a class="btn-card btn-light" href="#lienhe">Nhận thông tin</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="kcn.jpg" alt="Đất gần khu công nghiệp">
+          <div class="product-body">
+            <div class="badge">Tiềm năng tăng giá</div>
+            <h3>Đất gần KCN Cộng Hòa</h3>
+            <p>Phù hợp đón dòng chuyên gia, công nhân, nhu cầu ở thực và kinh doanh dịch vụ.</p>
+            <div class="price">Giá: 2.x tỷ</div>
+            <div class="product-actions">
+              <a class="btn-card btn-blue" href="tel:0922102999">Gọi ngay</a>
+              <a class="btn-card btn-light" href="#lienhe">Nhận thông tin</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="thucte1.jpg" alt="Lô theo quy hoạch đẹp">
+          <div class="product-body">
+            <div class="badge">Phù hợp đầu tư</div>
+            <h3>Lô theo quy hoạch đẹp</h3>
+            <p>Thông tin rõ ràng, dễ giới thiệu cho khách mới, phù hợp đầu tư trung và dài hạn.</p>
+            <div class="price">Giá: 2.x tỷ</div>
+            <div class="product-actions">
+              <a class="btn-card btn-blue" href="tel:0922102999">Gọi ngay</a>
+              <a class="btn-card btn-light" href="#lienhe">Nhận thông tin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#eef4ff;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Thư viện ảnh dự án</h2>
+        <p>Bộ ảnh thực tế giúp tăng độ tin tưởng khi gửi cho khách hàng.</p>
+      </div>
+
+      <div class="products">
+        <div class="product-card">
+          <img src="thucte1.jpg" alt="Ảnh thực tế dự án 1">
+        </div>
+        <div class="product-card">
+          <img src="thucte2.jpg" alt="Ảnh thực tế dự án 2">
+        </div>
+        <div class="product-card">
+          <img src="banner.jpg" alt="Ảnh tổng quan dự án">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vitri">
+    <div class="container">
+      <div class="section-head">
+        <h2>Vị trí bản đồ</h2>
+        <p>Bản đồ đang để khu vực Chí Linh - Hải Dương để khách dễ xem vị trí tổng quan.</p>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          loading="lazy"
+          allowfullscreen
+          src="https://maps.google.com/maps?q=Chi%20Linh%20Hai%20Duong&t=&z=13&ie=UTF8&iwloc=&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="lienhe">
+    <div class="container">
+      <div class="contact-cta">
+        <div>
+          <h2>Liên hệ tư vấn ngay</h2>
+          <p>Nhận bảng giá, vị trí đẹp, quỹ hàng mới và hỗ trợ xem đất thực tế nhanh.</p>
+          <p>Website này đã hoàn chỉnh để gắn Facebook, Zalo, chạy quảng cáo và gửi khách hàng.</p>
+        </div>
+        <div class="contact-box">
+          <div><strong>Hotline:</strong> 0922 102 999</div>
+          <div><strong>Email:</strong> vudinhthang0490@gmail.com</div>
+          <div><strong>Khu vực:</strong> Chí Linh - Hải Dương</div>
+          <div><strong>Hỗ trợ:</strong> Mua bán - Ký gửi - Tư vấn đầu tư</div>
+          <div style="margin-top:16px;">
+            <a class="btn-main" href="tel:0922102999">Bấm để gọi ngay</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2025 Khu Đô Thị Thành Đông Chí Linh</div>
+      <div>Thiết kế giao diện chuẩn công ty bất động sản</div>
+    </div>
+  </footer>
+
+  <a class="floating-call" href="tel:0922102999">📞 0922 102 999</a>
+</body>
+</html>
