@@ -537,7 +537,31 @@
     .soft-section-2{
       background:var(--soft-2);
     }
+.video-section{
+  padding: 30px 0 10px;
+}
 
+.video-box{
+  background: #000;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+}
+
+.video-box video{
+  width: 100%;
+  display: block;
+  max-height: 620px;
+  object-fit: cover;
+}
+
+.video-caption{
+  margin-top: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+}
     @media (max-width:1100px){
       .hero h1{
         font-size:44px;
@@ -660,7 +684,25 @@
 
   </div>
 </section>
+<section class="video-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Video giới thiệu dự án</h2>
+      <p>Video tổng quan giúp khách hàng hình dung rõ hơn về vị trí, quy hoạch và tiềm năng dự án.</p>
+    </div>
 
+    <div class="video-box">
+      <video controls autoplay muted loop playsinline>
+        <source src="video/gioithieu.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ video.
+      </video>
+    </div>
+
+    <div class="video-caption">
+      Video giới thiệu Khu Đô Thị Thành Đông Chí Linh
+    </div>
+  </div>
+</section>
   <section class="soft-section">
     <div class="container">
       <div class="section-head">
