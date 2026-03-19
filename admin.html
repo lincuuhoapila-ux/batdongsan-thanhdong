@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin đăng bài</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin:0;
+      background:#f5f6fa;
+      color:#222;
+    }
+
+    .wrap{
+      width:min(1100px, 94%);
+      margin:30px auto;
+    }
+
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+
+    .top h1{
+      margin:0;
+      font-size:32px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border:none;
+      border-radius:10px;
+      background:#ff5a2f;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+    }
+
+    .btn.gray{
+      background:#666;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:24px;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:18px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      padding:22px;
+    }
+
+    .card h2{
+      margin-top:0;
+      font-size:24px;
+    }
+
+    .form-group{
+      margin-bottom:14px;
+    }
+
+    label{
+      display:block;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #ddd;
+      border-radius:10px;
+      font:inherit;
+      box-sizing:border-box;
+    }
+
+    textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .post-item{
+      border:1px solid #e8e8e8;
+      border-radius:14px;
+      padding:14px;
+      margin-bottom:12px;
+      background:#fafafa;
+    }
+
+    .post-item h3{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+
+    .meta{
+      color:#777;
+      font-size:14px;
+      margin-bottom:8px;
+    }
+
+    .thumb{
+      width:100%;
+      max-height:180px;
+      object-fit:cover;
+      border-radius:10px;
+      margin:8px 0 12px;
+      background:#eee;
+    }
+
+    .small-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .small-btn{
+      border:none;
+      border-radius:8px;
+      padding:8px 12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .edit{
+      background:#1f8bff;
+      color:#fff;
+    }
+
+    .delete{
+      background:#e53935;
+      color:#fff;
+    }
+
+    .note{
+      font-size:14px;
+      color:#666;
+      margin-top:10px;
+      line-height:1.6;
+    }
+
+    @media (max-width: 900px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .row{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Admin đăng bài</h1>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn gray" href="index.html">← Về trang chủ</a>
+        <button class="btn" onclick="resetForm()">+ Bài mới</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 id="formTitle">Thêm bài viết</h2>
+
+        <form id="postForm">
+          <input type="hidden" id="postId" />
+
+          <div class="row">
+            <div class="form-group">
+              <label for="title">Tiêu đề</label>
+              <input id="title" type="text" required />
+            </div>
+
+            <div class="form-group">
+              <label for="date">Ngày đăng</label>
+              <input id="date" type="text" placeholder="19/03/2026" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="summary">Mô tả ngắn</label>
+            <textarea id="summary" placeholder="Mô tả ngắn hiển thị ngoài trang chủ"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Ảnh đại diện</label>
+            <input id="image" type="text" placeholder="https://... hoặc images/anh1.jpg" />
+          </div>
+
+          <div class="form-group">
+            <label for="images">Danh sách ảnh gallery</label>
+            <textarea id="images" placeholder="Mỗi dòng 1 ảnh hoặc ngăn cách bằng dấu phẩy"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="content">Nội dung bài viết</label>
+            <textarea id="content" placeholder="Bạn có thể nhập HTML như <p>...</p> hoặc chỉ nhập chữ thường"></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Lưu bài viết</button>
+            <button class="btn gray" type="button" onclick="resetForm()">Làm mới form</button>
+          </div>
+        </form>
+
+        <div class="note">
+          Bài viết được lưu trên trình duyệt bằng localStorage.  
+          Nếu muốn nội dung xuống dòng đẹp, bạn có thể nhập HTML như:
+          <code>&lt;p&gt;Đoạn 1&lt;/p&gt;&lt;p&gt;Đoạn 2&lt;/p&gt;</code>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Danh sách bài viết</h2>
+        <div id="postList">Đang tải...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "customPosts";
+
+    async function loadBasePosts() {
+      try {
+        const res = await fetch("posts.json");
+        if (!res.ok) return [];
+        return await res.json();
+      } catch {
+        return [];
+      }
+    }
+
+    function getCustomPosts() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function saveCustomPosts(posts) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    }
+
+    async function getAllPosts() {
+      const basePosts = await loadBasePosts();
+      const customPosts = getCustomPosts();
+
+      const map = new Map();
+
+      basePosts.forEach(post => map.set(String(post.id), post));
+      customPosts.forEach(post => map.set(String(post.id), post));
+
+      return Array.from(map.values()).sort((a, b) => Number(b.id) - Number(a.id));
+    }
+
+    function normalizeImages(value, fallbackImage = "") {
+      const list = value
+        .split(/\n|,/)
+        .map(item => item.trim())
+        .filter(Boolean);
+
+      if (!list.length && fallbackImage) return [fallbackImage];
+      return list;
+    }
+
+    function escapeHtml(text) {
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function plainTextToHtml(text) {
+      if (!text) return "";
+      if (text.includes("<p>") || text.includes("<div>") || text.includes("<br")) {
+        return text;
+      }
+      return text
+        .split(/\n{2,}/)
+        .map(block => `<p>${escapeHtml(block).replace(/\n/g, "<br>")}</p>`)
+        .join("");
+    }
+
+    async function renderPosts() {
+      const allPosts = await getAllPosts();
+      const postList = document.getElementById("postList");
+
+      if (!allPosts.length) {
+        postList.innerHTML = "<p>Chưa có bài viết nào.</p>";
+        return;
+      }
+
+      postList.innerHTML = allPosts.map(post => `
+        <div class="post-item">
+          <h3>${post.title || ""}</h3>
+          <div class="meta">ID: ${post.id} | Ngày: ${post.date || ""}</div>
+          ${post.image ? `<img class="thumb" src="${post.image}" alt="${post.title || ""}">` : ""}
+          <div style="margin-bottom:10px; color:#555;">${post.summary || ""}</div>
+          <div class="small-actions">
+            <button class="small-btn edit" onclick="editPost('${post.id}')">Sửa</button>
+            <button class="small-btn delete" onclick="deletePost('${post.id}')">Xóa</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function editPost(id) {
+      const allPosts = await getAllPosts();
+      const post = allPosts.find(p => String(p.id) === String(id));
+      if (!post) return;
+
+      document.getElementById("formTitle").innerText = "Sửa bài viết";
+      document.getElementById("postId").value = post.id || "";
+      document.getElementById("title").value = post.title || "";
+      document.getElementById("date").value = post.date || "";
+      document.getElementById("summary").value = post.summary || "";
+      document.getElementById("image").value = post.image || "";
+      document.getElementById("images").value = (post.images || []).join("\n");
+      document.getElementById("content").value = post.content || "";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function deletePost(id) {
+      if (!confirm("Bạn chắc chắn muốn xóa bài này?")) return;
+
+      const basePosts = await loadBasePosts();
+      const basePost = basePosts.find(p => String(p.id) === String(id));
+
+      let customPosts = getCustomPosts();
+
+      if (basePost) {
+        customPosts = customPosts.filter(p => String(p.id) !== String(id));
+        customPosts.push({
+          ...basePost,
+          id: basePost.id,
+          _deleted: true
+        });
+      } else {
+        customPosts = customPosts.filter(p => String(p.id) !== String(id));
+      }
+
+      saveCustomPosts(customPosts);
+      resetForm();
+      renderPosts();
+      alert("Đã xóa bài viết.");
+    }
+
+    function resetForm() {
+      document.getElementById("formTitle").innerText = "Thêm bài viết";
+      document.getElementById("postForm").reset();
+      document.getElementById("postId").value = "";
+    }
+
+    document.getElementById("postForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const id = document.getElementById("postId").value || Date.now();
+      const title = document.getElementById("title").value.trim();
+      const date = document.getElementById("date").value.trim();
+      const summary = document.getElementById("summary").value.trim();
+      const image = document.getElementById("image").value.trim();
+      const imagesRaw = document.getElementById("images").value.trim();
+      const contentRaw = document.getElementById("content").value.trim();
+
+      const images = normalizeImages(imagesRaw, image);
+      const content = plainTextToHtml(contentRaw);
+
+      let customPosts = getCustomPosts().filter(p => String(p.id) !== String(id));
+
+      const newPost = {
+        id,
+        title,
+        date,
+        summary,
+        image: image || (images[0] || ""),
+        images,
+        content
+      };
+
+      customPosts.push(newPost);
+      saveCustomPosts(customPosts);
+
+      alert("Đã lưu bài viết.");
+      resetForm();
+      renderPosts();
+    });
+
+    async function init() {
+      const deletedIds = new Set(
+        getCustomPosts()
+          .filter(p => p._deleted)
+          .map(p => String(p.id))
+      );
+
+      if (deletedIds.size) {
+        const customPosts = getCustomPosts().filter(p => !p._deleted);
+        saveCustomPosts(customPosts);
+      }
+
+      renderPosts();
+    }
+
+    init();
+  </script>
+</body>
+</html>

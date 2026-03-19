@@ -92,57 +92,94 @@
 </div>
 
 <script>
-function changeMainImage(src) {
-  document.getElementById("mainImage").src = src;
-}
+  const STORAGE_KEY = "customPosts";
 
-async function loadPost() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if (!id) {
-    document.getElementById("postDetail").innerHTML = "Thiếu id bài viết.";
-    return;
+  async function loadBasePosts() {
+    try {
+      const res = await fetch("./posts.json");
+      if (!res.ok) return [];
+      return await res.json();
+    } catch {
+      return [];
+    }
   }
 
-  try {
-    const res = await fetch("./posts.json");
+  function getCustomPosts() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  }
 
-    if (!res.ok) {
-      throw new Error("Không tải được posts.json");
-    }
+  async function getAllPosts() {
+    const basePosts = await loadBasePosts();
+    const customPosts = getCustomPosts();
 
-    const posts = await res.json();
-    const post = posts.find(p => String(p.id) === String(id));
+    const deletedIds = new Set(
+      customPosts.filter(p => p._deleted).map(p => String(p.id))
+    );
 
-    if (!post) {
-      document.getElementById("postDetail").innerHTML = "Không tìm thấy bài viết.";
+    const map = new Map();
+
+    basePosts.forEach(post => {
+      if (!deletedIds.has(String(post.id))) {
+        map.set(String(post.id), post);
+      }
+    });
+
+    customPosts.forEach(post => {
+      if (!post._deleted) {
+        map.set(String(post.id), post);
+      }
+    });
+
+    return Array.from(map.values());
+  }
+
+  function changeMainImage(src) {
+    const img = document.getElementById("mainImage");
+    if (img) img.src = src;
+  }
+
+  async function loadPost() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) {
+      document.getElementById("postDetail").innerHTML = "Thiếu id bài viết.";
       return;
     }
 
-    const mainImage = post.images?.[0] || "";
-    const thumbs = (post.images || [])
-      .map(img => `<img src="${img}" onclick="changeMainImage('${img}')">`)
-      .join("");
+    try {
+      const posts = await getAllPosts();
+      const post = posts.find(p => String(p.id) === String(id));
 
-    document.getElementById("postDetail").innerHTML = `
-      <h1>${post.title}</h1>
-      <div class="date">${post.date || ""}</div>
-      <div class="content">${post.content}</div>
+      if (!post) {
+        document.getElementById("postDetail").innerHTML = "Không tìm thấy bài viết.";
+        return;
+      }
 
-      ${mainImage ? `
-        <img id="mainImage" class="main-image" src="${mainImage}">
-        <div class="thumbs">${thumbs}</div>
-      ` : ""}
-    `;
-  } catch (err) {
-    document.getElementById("postDetail").innerHTML = "Lỗi tải bài viết.";
-    console.error(err);
+      const mainImage = post.image || (post.images && post.images[0]) || "";
+      const thumbs = (post.images || [])
+        .map(img => `<img src="${img}" alt="${post.title}" onclick="changeMainImage('${img}')">`)
+        .join("");
+
+      document.getElementById("postDetail").innerHTML = `
+        <h1>${post.title || ""}</h1>
+        <div class="date">${post.date || ""}</div>
+        <div class="content">${post.content || post.summary || ""}</div>
+
+        ${mainImage ? `
+          <div class="main-image-wrap">
+            <img id="mainImage" class="main-image" src="${mainImage}" alt="${post.title}">
+          </div>
+          <div class="thumbs">
+            ${thumbs}
+          </div>
+        ` : ""}
+      `;
+    } catch (err) {
+      document.getElementById("postDetail").innerHTML = "Lỗi tải bài viết.";
+      console.error("Load post error:", err);
+    }
   }
-}
 
-loadPost();
+  loadPost();
 </script>
-
-</body>
-</html>

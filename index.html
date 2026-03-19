@@ -634,6 +634,7 @@
         <a href="#tintuc">Tin tức</a>
         <a href="#vitri">Vị trí</a>
         <a href="#lienhe">Liên hệ</a>
+        <a href="admin.html">Admin</a>
       </div>
       <a class="btn-hotline" href="tel:0922102999">Gọi ngay</a>
     </div>
@@ -691,7 +692,7 @@
       <p>Video tổng quan giúp khách hàng hình dung rõ hơn về vị trí, quy hoạch và tiềm năng dự án.</p>
     </div>
 
-  <div class="video-box">
+ <div class="video-box">
   <iframe
     src="https://www.youtube.com/embed/heiAJuHdX_Y"
     title="Video giới thiệu dự án"
@@ -886,35 +887,60 @@
   <a class="floating-call" href="tel:0922102999">📞 0922 102 999</a>
 
   <script>
-    async function loadPosts() {
-      try {
-        const res = await fetch('posts.json');
-        const posts = await res.json();
-        const newsList = document.getElementById('newsList');
+  const STORAGE_KEY = "customPosts";
 
-        if (!posts.length) {
-          newsList.innerHTML = '<p>Chưa có bài viết nào.</p>';
-          return;
-        }
-
-        newsList.innerHTML = posts.map(post => `
-          <div class="news-card">
-            <img src="${post.image}" alt="${post.title}">
-            <div class="news-body">
-              <div class="news-date">${post.date}</div>
-              <h3>${post.title}</h3>
-              <p>${post.summary}</p>
-              <a class="news-link" href="post.html?id=${post.id}">Xem chi tiết</a>
-            </div>
-          </div>
-        `).join('');
-      } catch (error) {
-        document.getElementById('newsList').innerHTML = '<p>Không tải được bài viết.</p>';
-        console.error(error);
-      }
+  async function loadBasePosts() {
+    try {
+      const res = await fetch("posts.json");
+      if (!res.ok) return [];
+      return await res.json();
+    } catch {
+      return [];
     }
+  }
 
-    loadPosts();
-  </script>
-</body>
-</html>
+  function getCustomPosts() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  }
+
+  async function getAllPosts() {
+    const basePosts = await loadBasePosts();
+    const customPosts = getCustomPosts();
+
+    const map = new Map();
+
+    basePosts.forEach(post => map.set(String(post.id), post));
+    customPosts.forEach(post => map.set(String(post.id), post));
+
+    return Array.from(map.values()).sort((a, b) => Number(b.id) - Number(a.id));
+  }
+
+  async function loadPosts() {
+    try {
+      const posts = await getAllPosts();
+      const newsList = document.getElementById("newsList");
+
+      if (!posts.length) {
+        newsList.innerHTML = "<p>Chưa có bài viết nào.</p>";
+        return;
+      }
+
+      newsList.innerHTML = posts.map(post => `
+        <div class="news-card">
+          <img src="${post.image || ''}" alt="${post.title}">
+          <div class="news-body">
+            <div class="news-date">${post.date || ""}</div>
+            <h3>${post.title || ""}</h3>
+            <p>${post.summary || ""}</p>
+            <a class="news-link" href="post.html?id=${post.id}">Xem chi tiết</a>
+          </div>
+        </div>
+      `).join('');
+    } catch (error) {
+      document.getElementById("newsList").innerHTML = "<p>Không tải được bài viết.</p>";
+      console.error(error);
+    }
+  }
+
+  loadPosts();
+</script>
